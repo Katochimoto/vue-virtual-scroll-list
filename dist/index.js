@@ -320,6 +320,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       // return the right zone info base on `start/index`.
       getZone: function getZone(index) {
         var start;
+        var end;
         var delta = this.delta;
         index = parseInt(index, 10);
         index = Math.max(0, index);
@@ -332,8 +333,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           start = index;
         }
 
+        end = start + delta.keeps - 1;
+
+        if (end > delta.total) {
+          end = delta.total - 1;
+        }
+
         return {
-          end: start + delta.keeps - 1,
+          end: end,
           start: start,
           isLast: isLast
         };
